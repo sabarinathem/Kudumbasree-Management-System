@@ -19,7 +19,7 @@ class Savings(models.Model):
     date=models.DateField(auto_now=True)
     month=models.CharField(max_length=100,null=True,blank=True)
     year=models.CharField(max_length=100,null=True,blank=True)
-    previous_month_balance=models.IntegerField()
+    previous_month_balance=models.IntegerField(null=True,blank=True)
     first_weak=models.IntegerField(null=True,blank=True)
     second_weak=models.IntegerField(null=True,blank=True)
     third_weak=models.IntegerField(null=True,blank=True)

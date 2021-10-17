@@ -6,4 +6,5 @@ urlpatterns=[
 
     path('',views.index,name="index"),
     path('<int:id>/select_month_and_year',views.select_month_and_year,name="select_month_and_year"),
+    path('<int:id>/add_or_update_savings',views.add_or_update_savings,name="add_or_update_savings")
 ]

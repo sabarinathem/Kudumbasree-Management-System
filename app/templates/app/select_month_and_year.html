@@ -1,6 +1,6 @@
 <h1>{{member.name}}</h1>
 
-<form action="#" method="POST">
+<form action="{% url 'app:add_or_update_savings' member.id %}" method="POST">
     {% csrf_token %}
     <table>
         <tr>

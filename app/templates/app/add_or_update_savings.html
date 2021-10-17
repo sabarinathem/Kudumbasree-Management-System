@@ -1,0 +1,13 @@
+{{member.name}}
+<table>
+<form action="{% url 'app:add_or_update_savings' member.id %}" method="POST">
+   {% csrf_token %}
+    <tr>
+        {{form.as_table}}
+    </tr>
+        <tr>
+           <td> <input type="submit" value="ചേർക്കുക"></td>
+        </tr>
+    
+</form>
+</table>
