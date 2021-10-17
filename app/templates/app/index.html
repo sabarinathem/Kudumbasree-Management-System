@@ -1,1 +1,56 @@
-<h1>Helloworld</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INDEX</title>
+    <style>
+        table{
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th{
+            width: 20%;
+            padding:5px;
+            }
+        td{
+            padding:10px;
+        }
+        td a{
+            text-decoration: none;
+            color: dodgerblue;
+        }
+    </style>
+</head>
+<body>
+    <table border="1">
+       <thead>
+           <th>
+            ക്രമ നമ്പർ 
+           </th>
+           <th>
+            അംഗത്തിന്റെ പേര്
+           </th>
+           <th>
+            അംഗത്വ നമ്പർ   
+           </th>
+           <th>
+            അംഗത്വം നൽകിയ തീയതി 
+           </th>
+           <th>
+            വിഭാഗം 
+           </th>
+       </thead>
+       <tbody>
+           
+           {% for member in members %}
+           <tr>
+           <td>{{member.id}}</td><td><a href="#">{{member.name}}</a></td><td>{{member.member_number}}</td><td>{{member.date_of_membership}}</td><td>{{member.category}}</td>
+        </tr>
+           {% endfor %}
+        
+       </tbody>
+    </table>
+</body>
+</html>
