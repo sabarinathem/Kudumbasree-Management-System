@@ -11,6 +11,9 @@ class Member(models.Model):
     signature=models.ImageField(null=True,blank=True,upload_to="signature/")
     image=models.ImageField(null=True,blank=True,upload_to="image/")
 
+    def __str__(self):
+        return (self.name)
+
 class Savings(models.Model):
     member=models.ForeignKey(Member,on_delete=models.CASCADE)
     date=models.DateField(auto_now=True)
