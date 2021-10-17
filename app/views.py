@@ -4,8 +4,11 @@ from app.models import Member, Savings
 from app.form import SavingForm
 # Create your views here.
 import datetime
+from app.month import months
+
 
 def index(request):
+   
     members=Member.objects.all()
     context={'members':members}
     return render(request,'app/index.html',context)
@@ -22,7 +25,6 @@ def add_or_update_savings(request,id):
         if request.method=="POST":
             month=request.POST["month"]
             year=request.POST["year"]
-            print(type(month),type(year))
             
         member=Member.objects.get(id=id)
         saving=Savings.objects.get(member=member,month=month,year=year)
@@ -78,14 +80,38 @@ def save(request,id):
         if request.method=="POST":
             month=request.POST["month"]
             year=request.POST["year"]
+            
+            #take previous month balance of member
+            m=int(months(month))-1
+            y=int(year)
+            if m==0:
+                m=12
+                y=y-1
+                
+            
+            d=datetime.datetime(y,m,12)
+            prev_month=d.strftime("%B")
+        
             form=SavingForm(request.POST)
             if form.is_valid():
                 sav=form.save(commit=False)
                 member=Member.objects.get(id=id)
+                try:
+                    
+                    year=str(y)
+                    prev_year=year
+                    prev_saving=Savings.objects.get(member=member,month=prev_month,year=prev_year)
+                    sav.previous_month_balance=prev_saving.total_savings
+                    prev_mon=prev_saving.total_savings
+                    print(prev_mon)
+                    
+                except:
+                    sav.previous_month_balance=0
+                
                 sav.member=member
                 sav.month=month
                 sav.year=year
-                sav.previous_month_balance=200
+                
                 first_weak=form.cleaned_data['first_weak']
                 if first_weak==None:
                     first_weak=0
@@ -104,7 +130,7 @@ def save(request,id):
                 total_savings_this_month=first_weak+second_weak+third_weak+fourth_weak+fifth_weak
                 total_savings=total_savings_this_month
                 sav.savings_of_this_month=total_savings_this_month
-                sav.total_savings=total_savings
+                sav.total_savings=total_savings+prev_mon
                 sav.save()
 
 
