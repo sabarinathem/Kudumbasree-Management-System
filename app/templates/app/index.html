@@ -46,7 +46,7 @@
            
            {% for member in members %}
            <tr>
-           <td>{{member.id}}</td><td><a href="#">{{member.name}}</a></td><td>{{member.member_number}}</td><td>{{member.date_of_membership}}</td><td>{{member.category}}</td>
+           <td>{{member.id}}</td><td><a href="{% url 'app:select_month_and_year' member.id %}">{{member.name}}</a></td><td>{{member.member_number}}</td><td>{{member.date_of_membership}}</td><td>{{member.category}}</td>
         </tr>
            {% endfor %}
         
