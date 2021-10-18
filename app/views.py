@@ -1,5 +1,5 @@
 from django.http.response import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from app.models import Member, Savings
 from app.form import SavingForm
 # Create your views here.
@@ -75,7 +75,7 @@ def save(request,id):
                 total_savings=previous_month_savings+total_savings_this_month
                 sav.total_savings=total_savings
                 sav.save()
-                return HttpResponse(first_weak+second_weak+third_weak+fourth_weak+fifth_weak)
+                return redirect('app:show')
     except:
         if request.method=="POST":
             month=request.POST["month"]
@@ -98,8 +98,8 @@ def save(request,id):
                 member=Member.objects.get(id=id)
                 try:
                     
-                    year=str(y)
-                    prev_year=year
+                    yea=str(y)
+                    prev_year=yea
                     prev_saving=Savings.objects.get(member=member,month=prev_month,year=prev_year)
                     sav.previous_month_balance=prev_saving.total_savings
                     prev_mon=prev_saving.total_savings
@@ -107,6 +107,7 @@ def save(request,id):
                     
                 except:
                     sav.previous_month_balance=0
+                    prev_mon=0
                 
                 sav.member=member
                 sav.month=month
@@ -128,12 +129,17 @@ def save(request,id):
                 if fifth_weak==None:
                     fifth_weak=0
                 total_savings_this_month=first_weak+second_weak+third_weak+fourth_weak+fifth_weak
-                total_savings=total_savings_this_month
+
                 sav.savings_of_this_month=total_savings_this_month
-                sav.total_savings=total_savings+prev_mon
+                sav.total_savings=total_savings_this_month+prev_mon
                 sav.save()
 
 
-                return HttpResponse(total_savings)
+                return redirect('app:show')
+
+def show(request):
+    savings=Savings.objects.all()
+    context={'savings':savings}
+    return render(request,'app/show.html',context)
 
 
