@@ -142,4 +142,26 @@ def show(request):
     context={'savings':savings}
     return render(request,'app/show.html',context)
 
+def savings_of_intended_month(request):
+    if request.method=="POST":
+        mon=request.POST["month"]
+        yea=request.POST["year"]
+        monthsavings=Savings.objects.filter(month=mon,year=yea)
+        monthsum=0
+        for i in monthsavings:
+            monthsum=monthsum+i.savings_of_this_month
+        totalsum=0
+        for j in monthsavings:
+            totalsum=totalsum+j.total_savings
+        # totalsavings=Savings.objects.all()
+        # totalsum=0
+        # for j in totalsavings:
+        #     totalsum=totalsum+j.total_savings
+        context={'savings':monthsavings,'month':mon,'year':yea,'total_savings_of_this_month':monthsum,'totalsavings':totalsum}
+        return render(request,'app/show_savings_of_intended_month.html',context)
+    date=datetime.datetime.now()
+    y=int(date.strftime("%Y"))
+    context={'range':range(y-10,y+10)}
+    return render(request,'app/savings_of_intended_month.html',context)
+
 

@@ -1,0 +1,39 @@
+
+
+<form action="{% url 'app:savings_of_intended_month'%}" method="POST">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <select id="month" name="month" style="width:150px">
+                <option value="January">January</option>
+                <option value="February">February</option>
+                <option value="March">March</option>
+                <option value="April">April</option>
+                <option value="May">May</option>
+                <option value="June">June</option>
+                <option value="July">July</option>
+                <option value="August">August</option>
+                <option value="September">September</option>
+                <option value="October">October</option>
+                <option value="November">November</option>
+                <option value="December">December</option>
+
+              </select>
+            <!-- <td>Month</td><td><input type="text" name="month"></td> -->
+        </tr>
+        <br><br>
+        <tr>
+            <select id="year" name="year" style="width:150px">
+                {% for year in range %}
+                <option value="{{year}}">{{year}}</option>
+                {% endfor %}
+              </select>
+            <!-- <td>year</td><td><input type="text" name="year"></td> -->
+        </tr>
+        <br><br>
+        <tr>
+            
+            <td><input type="submit"></td>
+        </tr>
+    </table>
+</form>

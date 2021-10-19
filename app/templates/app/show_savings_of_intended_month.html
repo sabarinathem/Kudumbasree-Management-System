@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savings</title>
+    <style>
+        table{
+            width: 100%;
+            border-collapse: collapse;
+        }
+        #h4{
+            display: inline;
+            float: right;
+        }
+    </style>
+</head>
+<body>
+     <h4 id="h4" >&emsp;{{year}}</h4><h4 id="h4">{{month}}</h4>
+    <table border="1">
+        <thead>
+            <tr>
+            <th rowspan="3">അംഗത്തിന്റെ പേര്</th>
+            <th rowspan="3">മാസാരംഭത്തിലെ നീക്കിയിരിപ്പ്</th>
+            
+             <th colspan="7">സമ്പാദ്യം</th>
+        
+            
+        </tr>
+        <tr>
+            <th colspan="5">പ്രതിവര സമ്പാദ്യം</th>
+            <th rowspan="2">തൻമാസത്തെ സമ്പാദ്യം </th>
+            <th rowspan="2">ആകെ സമ്പാദ്യം</th>
+        </tr>
+        <tr>
+            <th>ഒന്നാം ആഴ്ച</th>
+            <th>രണ്ടാം ആഴ്ച</th>
+            <th>മൂന്നാം ആഴ്ച</th>
+            <th>നാലാം ആഴ്ച</th>
+            <th>അഞ്ചാം ആഴ്ച</th>
+           
+        </tr>
+        </thead>
+        <tbody>
+       {% for sav in savings %}
+            <tr>
+                <td>{{sav.member}}</td><td>{{sav.previous_month_balance}}</td><td>{{sav.first_weak}}</td><td>{{sav.second_weak}}</td><td>{{sav.third_weak}}</td><td>{{sav.fourth_weak}}</td><td>{{sav.fifth_weak}}</td><td>{{sav.savings_of_this_month}}</td><td>{{sav.total_savings}}</td>
+            </tr>
+        {% endfor %} 
+        <tr>
+            <td colspan="8" style="text-align: right;">{{total_savings_of_this_month}}</td><td style="text-align: right;">{{totalsavings}}</td>
+        </tr>
+        </tbody>
+    </table>
+     
+
+
+</body>
+</html>
+<!-- <th>ഒന്നാം ആഴ്ച</th>
+<th>രണ്ടാം ആഴ്ച</th>
+<th>മൂന്നാം ആഴ്ച</th>
+<th>നാലാം ആഴ്ച</th>
+<th>അഞ്ചാം ആഴ്ച</th> -->
