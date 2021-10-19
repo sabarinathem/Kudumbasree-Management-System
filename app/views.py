@@ -1,7 +1,7 @@
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 from app.models import Member, Savings
-from app.form import SavingForm
+from app.form import SavingForm,MemberForm
 # Create your views here.
 import datetime
 from app.month import months
@@ -12,6 +12,15 @@ def index(request):
     members=Member.objects.all()
     context={'members':members}
     return render(request,'app/index.html',context)
+def add_member(request):
+    if request.method=="POST":
+        form=MemberForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponse("success")
+    form=MemberForm()
+    context={'form':form}
+    return render(request,'app/add_member.html',context)
 
 def select_month_and_year(request,id):
     member=Member.objects.get(id=id)
