@@ -7,6 +7,8 @@ import datetime
 from app.month import months
 
 
+def startpage(request):
+    return render(request,'app/startpage.html')
 def index(request):
    
     members=Member.objects.all()

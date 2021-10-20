@@ -1,10 +1,12 @@
+from os import name
 from django.urls import path
 from app import views
 
 app_name='app'
 urlpatterns=[
 
-    path('',views.index,name="index"),
+    path('',views.startpage,name="startpage"),
+    path('index/',views.index,name="index"),
     path('addmember/',views.add_member,name="add_member"),
     path('<int:id>/select_month_and_year',views.select_month_and_year,name="select_month_and_year"),
     path('<int:id>/add_or_update_savings',views.add_or_update_savings,name="add_or_update_savings"),
