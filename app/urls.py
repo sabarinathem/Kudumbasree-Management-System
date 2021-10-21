@@ -6,6 +6,7 @@ app_name='app'
 urlpatterns=[
 
     path('',views.startpage,name="startpage"),
+    path('successful/',TemplateView.as_view(template_name="app/successful.html"),name="successful"),
     path('main/',TemplateView.as_view(template_name="app/main.html")),
     path('index/',views.index,name="index"),
     path('addmember/',views.add_member,name="add_member"),

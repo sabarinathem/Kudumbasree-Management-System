@@ -86,7 +86,7 @@ def save(request,id):
                 total_savings=previous_month_savings+total_savings_this_month
                 sav.total_savings=total_savings
                 sav.save()
-                return redirect('app:show')
+                return redirect('app:successful')
     except:
         if request.method=="POST":
             month=request.POST["month"]
@@ -146,7 +146,7 @@ def save(request,id):
                 sav.save()
 
 
-                return redirect('app:show')
+                return redirect('app:successful')
 
 def show(request):
     savings=Savings.objects.all()
