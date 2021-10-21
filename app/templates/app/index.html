@@ -1,10 +1,13 @@
+{% extends 'app/main.html' %}
 {% load static %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
     <title>INDEX</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -12,75 +15,62 @@
     <style>
         table{
             border-collapse: collapse;
-            width: 100%;
+            width:100%
         }
         th{
-            width: 20%;
+            
             padding:5px;
+            font-size: 20px;
+            color:#202C45;
+            
+            
             }
         td{
-            padding:10px;
+            padding:30px;
         }
         td a{
             text-decoration: none;
-            color:red;
+            color:#E81C2E
+        }
+        #link{
+            font-size: 25px;
+            font-weight: bold;
+            
+        }
+        #th10{
+            width: 10%;
+        }
+        #th20{
+                width: 20%;
+        }
+        #th40{
+                width: 40%;
         }
     </style>
 </head>
 <body>
-    <table class="table table-dark table-striped">
-        
-            <thead>
-              <tr>
-                <th scope="col">ക്രമ നമ്പർ </th>
-                <th scope="col">അംഗത്തിന്റെ പേര്</th>
-                <th scope="col">അംഗത്വ നമ്പർ</th>
-                <th scope="col">അംഗത്വം നൽകിയ തീയതി</th>
-                <th scope="col">വിഭാഗം</th>
-              </tr>
-            </thead>
-            <tbody>
-            {% for member in members %}
-              <tr>
-                <th scope="row">{{forloop.counter}}</th>
-                <td><a href="{% url 'app:select_month_and_year' member.id %}">{{member.name}}</a></td>
-                <td>{{member.member_number}}</td>
-                <td>{{member.date_of_membership}}</td>
-                <td>{{member.category}}</td>
-              </tr>
-            {% endfor %}
-            </tbody>
-         
-      </table>
-      
+    <table class="table table-striped table-light">
+        <thead>
+            <tr>
+              <th id="th10" scope="col">ക്രമ നമ്പർ </th>
+              <th id="th40" scope="col"><span style="margin-left: 20px;"> അംഗത്തിന്റെ പേര്</span></th>
+              <th id="th20" scope="col">അംഗത്വ നമ്പർ</th>
+              <th id="th20" scope="col">അംഗത്വം നൽകിയ തീയതി</th>
+              <th id="th20" scope="col">വിഭാഗം</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for member in members %}
+            <tr>
+              <td scope="row"><span style="margin-left: 20px;">{{forloop.counter}}</span></td>
+              <td ><span style="margin-left: 20px;"><a  id="link" href="{% url 'app:select_month_and_year' member.id %}">{{member.name}}</a></span></td>
+              <td>{{member.member_number}}</td>
+              <td style="text-align: center;" >{{member.date_of_membership}}</td>
+              <td>{{member.category}}</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+    </table>
 </body>
 </html>
-
-<!-- <table border="1">
-    <thead>
-        <th>
-         ക്രമ നമ്പർ 
-        </th>
-        <th>
-         അംഗത്തിന്റെ പേര്
-        </th>
-        <th>
-         അംഗത്വ നമ്പർ   
-        </th>
-        <th>
-         അംഗത്വം നൽകിയ തീയതി 
-        </th>
-        <th>
-         വിഭാഗം 
-        </th>
-    </thead>
-    <tbody>
-        
-        {% for member in members %}
-        <tr>
-        <td>{{forloop.counter}}</td><td><a href="{% url 'app:select_month_and_year' member.id %}">{{member.name}}</a></td><td>{{member.member_number}}</td><td>{{member.date_of_membership}}</td><td>{{member.category}}</td>
-     </tr>
-        {% endfor %}
-     
-    </tbody>
- </table> -->
+{% endblock content %} 

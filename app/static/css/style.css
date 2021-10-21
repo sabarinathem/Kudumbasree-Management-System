@@ -1001,7 +1001,7 @@ a:focus {
 
 .location .location-form .btn.btn-custom {
     width: 100%;
-    color: #E81C2E;
+    color: green;
     background: #ffffff;
     box-shadow: inset 0 0 0 0 #202C45;
 }
